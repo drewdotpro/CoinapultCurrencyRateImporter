@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+
+<config>
+    <modules>
+        <DrewDotPro_CoinapultCurrencyRateImporter>
+            <version>1.0.0</version>
+        </DrewDotPro_CoinapultCurrencyRateImporter>
+    </modules>
+	<global>
+		<currency>
+            <import>
+                <services>
+                    <drewdotpro_coinapultcurrencyrateimporter>
+                        <name>Coinapult</name>
+                        <model>drewdotpro_coinapultcurrencyrateimporter/coinapult</model>
+                    </drewdotpro_coinapultcurrencyrateimporter>
+                </services>
+            </import>
+        </currency>
+		<models>
+            <drewdotpro_coinapultcurrencyrateimporter>
+                <class>DrewDotPro_CoinapultCurrencyRateImporter_Model</class>
+            </drewdotpro_coinapultcurrencyrateimporter>
+        </models>
+        <drewdotpro_coinapultcurrencyrateimporter>
+            <!--The parameter filter can take any combination of "small", "medium", "large", "vip", "vip+", "100", "500", "2000", "5000", "10000". -->
+            <filter>small</filter>
+        </drewdotpro_coinapultcurrencyrateimporter>
+	</global>
+    <crontab>
+        <jobs>
+            <coinapult_currency_updates>
+                <schedule>
+                    <cron_expr>0,15,30,45 * * * *</cron_expr>
+                </schedule>
+                <run>
+                    <model>drewdotpro_coinapultcurrencyrateimporter/observer::scheduledUpdateCurrencyRates</model>
+                </run>
+            </coinapult_currency_updates>
+        </jobs>
+    </crontab>
+</config>
