@@ -20,7 +20,6 @@ class DrewDotPro_CoinapultCurrencyRateImporter_Model_Coinapult extends Mage_Dire
         require_once $mageFilename;
         umask(0);
         Mage::app();
-        Mage::log($currencyFrom . " TO " . $currencyTo, null, "debug.log");
 
         if (!in_array($currencyFrom, $this->currencySets)) {
             $this->_messages[] = Mage::helper('directory')->__('No rate provision for %s.', $currencyFrom);
@@ -69,7 +68,6 @@ class DrewDotPro_CoinapultCurrencyRateImporter_Model_Coinapult extends Mage_Dire
                 $this->_messages[] = Mage::helper('directory')->__('Cannot retrieve rate for %s.', $currencyTo);
                 return null;
             }
-            Mage::log($this->_rates[$currencyFrom] . " TO " . $this->_rates[$currencyTo], null, "debug.log");
             return (float)1 / $this->_rates[$currencyFrom] * $this->_rates[$currencyTo];
         } catch (Exception $e) {
             echo $e->getMessage();
